@@ -6,14 +6,13 @@
 
      ![etl flowchart_airflow](https://github.com/hassan848/airflow-weather-ETL/assets/72468804/1a24f498-1445-455d-8ddc-72bc918cddfb)
 
-I first created an EC2 instance where I configured the Airflow and python code. The python code consists of creating tasks for an Ariflow dag - and then multiple functions for the different tasks. The dag tasks involve:
+I first created an EC2 instance where I configured the Airflow and python code. The python code consists of creating an Airflow dag and then creating tasks for that Ariflow dag - and then multiple functions for the different tasks. The dag tasks involve:
 * Using a httpsensor to check wheather the API query is ready and working
-* Make an actual GET request to the API server with the request string with custom parameters
-* Transforming the returned weather data object from the API
+* Make an actual GET request to the API server with the request string having custom parameters
+* Transforming the returned weather data object from the API to be clean and in the correct format
 * Loading the transformed data object into an S3 bucket as a CSV file
 
 An S3 bucket should also be created as a pre-requisite for which the clean transformed data can be loaded and stored in. This was done using cloudformation and a bash script via a YAML file as Infrastructure as Code (IaC).
 
-
-
-I extract, transform the data in python with tasks on a dag within Apache Airflow - the Apache Airflow is running on an AWS EC2 instance (A virtual server)
+Afterall the s3 bucket should have the new loaded transformed csv file stored in it after each day, like so:
+![S3_bucket](https://github.com/hassan848/airflow-weather-ETL/assets/72468804/616b1070-55b6-44a0-9e97-def2c9998b33)
